@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="input">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#CCFFFFFF</item>
+        <item name="android:textColorHint">#CCFFFFFF</item>
+    </style>
+
+    <style name="onboarding_legals">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#B3FFFFFF</item>
+    </style>
+
+</resources>
