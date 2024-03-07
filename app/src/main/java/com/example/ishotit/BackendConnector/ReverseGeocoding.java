@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -45,11 +44,7 @@ public class ReverseGeocoding {
     }
 
     private static void askForLocationPermission(Context context, Activity activity) {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        } else {
-            Toast.makeText(context, "Location permission is required.", Toast.LENGTH_SHORT).show();
-        }
+        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
     }
 
     public static void getLocationName(Context context, Activity activity, Function<String, Void> callback) {
@@ -63,7 +58,7 @@ public class ReverseGeocoding {
             @Override
             public void onLocationChanged(@NonNull android.location.Location location) {
                 locationManager.removeUpdates(this);
-                Log.d("ISHOTIT:ReverseGeocoding", "Location updated");
+                // Log.d("ISHOTIT:ReverseGeocoding", "Location updated");
                 try {
                     ReverseGeocoding reverseGeocoding = new ReverseGeocoding(context, activity);
                     Location loc = new Location(location.getLatitude(), location.getLongitude());
@@ -91,14 +86,14 @@ public class ReverseGeocoding {
     }
 
     private String main(Location loc) {
-        Log.d("ISHOTIT:ReverseGeocoding", "Getting location name");
+        // Log.d("ISHOTIT:ReverseGeocoding", "Getting location name");
 
         if (loc == null) {
             Log.e("ISHOTIT:ReverseGeocoding", "Location is null");
             return "Unknown Location";
         }
         if (!this.isNewLocation(loc)) {
-            Log.d("ISHOTIT:ReverseGeocoding", "Location is not new, returning stored location name");
+            // Log.d("ISHOTIT:ReverseGeocoding", "Location is not new, returning stored location name");
             return this.getStoredLocationName();
         }
 
