@@ -3,7 +3,10 @@
     <string name="onboardind_form_username">Enter your @username</string>
     <string name="onboardind_form_phone">Enter your phone number</string>
     <string name="onboardind_form_age">Enter your age</string>
-    <string name="onboardind_legals">By continuying, you are accepting our Terms and Conditions</string>
+    <string name="onboardind_legals">By continuing, you are accepting our Terms and Conditions</string>
     <string name="onboardind_start_btn">Begin you journey</string>
-    <string name="onboardind_illustration">Illustration of young peoples taking a selfi</string>
+    <string name="onboardind_illustration">Illustration of young peoples taking a selfie</string>
+    <string name="camera_loadingLocation">Loading location…</string>
+    <string name="camera_captureBtnDescription">Take a picture</string>
+    <string name="camera_loadingInstructions">Loading instructions…</string>
 </resources>
