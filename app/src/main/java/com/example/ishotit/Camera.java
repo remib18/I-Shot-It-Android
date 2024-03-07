@@ -1,12 +1,15 @@
 package com.example.ishotit;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.ishotit.BackendConnector.ReverseGeocoding;
 
 public class Camera extends AppCompatActivity {
 
@@ -20,5 +23,18 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ReverseGeocoding.getLocationName(this, this, this::handleGeocodingResult);
+    }
+
+    private Void handleGeocodingResult(String locationName) {
+        TextView location = findViewById(R.id.camera_location);
+        location.setText(locationName);
+        return null;
     }
 }
