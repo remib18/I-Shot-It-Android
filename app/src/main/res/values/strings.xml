@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">I Shot It</string>
+    <string name="my_present_life">My Present Life</string>
+    <string name="todo">TODO</string>
 </resources>
