@@ -10,4 +10,6 @@
     <string name="camera_captureBtnDescription">Take a picture</string>
     <string name="camera_loadingInstructions">Loading instructions…</string>
     <string name="validation_enterLifeBtnDescription"><![CDATA[Enter life ->]]></string>
+    <string name="validation_loadingInstructions">Loading instructions...</string>
+    <string name="validation_loadingLocation">Loading location...</string>
 </resources>
