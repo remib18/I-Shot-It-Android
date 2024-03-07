@@ -42,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/onboarding_logo">
 
         <EditText
+            android:id="@+id/onboarding_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="22dp"
@@ -51,10 +52,12 @@
             android:inputType="text"
             android:paddingStart="29dp"
             android:textAppearance="@style/input"
+            android:textColor="#FFF"
             android:textColorHint="#CCFFFFFF"
             tools:ignore="RtlSymmetry" />
 
         <EditText
+            android:id="@+id/onboarding_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="22dp"
@@ -64,10 +67,12 @@
             android:inputType="phone"
             android:paddingStart="29dp"
             android:textAppearance="@style/input"
+            android:textColor="#FFF"
             android:textColorHint="#CCFFFFFF"
             tools:ignore="RtlSymmetry" />
 
         <EditText
+            android:id="@+id/onboarding_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="22dp"
@@ -77,6 +82,7 @@
             android:inputType="number"
             android:paddingStart="29dp"
             android:textAppearance="@style/input"
+            android:textColor="#FFF"
             android:textColorHint="#CCFFFFFF"
             tools:ignore="RtlSymmetry" />
 
@@ -91,6 +97,7 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/onboarding_start_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="66dp"

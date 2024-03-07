@@ -3,8 +3,8 @@
 
     <style name="input">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#CCFFFFFF</item>
-        <item name="android:textColorHint">#CCFFFFFF</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFFFFF</item>
     </style>
 
     <style name="camera_instructions">

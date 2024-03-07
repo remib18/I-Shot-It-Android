@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,13 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String userId = prefs.getString("userId", "");
-        String lastPosted = prefs.getString("lastPosted", null);
+        String lastPosted = prefs.getString("lastPosted", "");
 
         Class<?> activity;
         if (userId.isEmpty()) {
             activity = Onboarding.class;
-        } else if (Objects.nonNull(lastPosted) || !Objects.requireNonNull(lastPosted).isEmpty()) {
-            assert lastPosted != null;
+        } else if (!lastPosted.isEmpty()) {
             Date lastPostedAt = new Date(Long.parseLong(lastPosted));
             Date now = new Date();
             boolean havePostedInTheLast24h = now.getTime() - lastPostedAt.getTime() < 24 * 60 * 60 * 1000;
