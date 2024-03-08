@@ -1,7 +1,9 @@
 package com.example.ishotit;
 
 import android.os.Bundle;
-import androidx.viewpager2.widget.ViewPager2;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
@@ -9,7 +11,6 @@ import java.util.List;
 
 public class myPresentLife extends AppCompatActivity {
 
-    private ViewPager2 viewPager;
     private List<String> imageUrls = Arrays.asList(
             "https://i.pinimg.com/474x/6f/3a/21/6f3a215076dd1fef558a7f266ce65596--google-search-yahoo-search.jpg",
             "https://www.christies.com/lotfinderimages/d55279/d5527997a.jpg",
@@ -23,10 +24,9 @@ public class myPresentLife extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_present_life);
 
-        ImagePagerAdapter adapter = new ImagePagerAdapter(this, imageUrls);
-        ViewPager2 viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-        viewPager.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
-        viewPager.setOffscreenPageLimit(1);
+        RecyclerView recyclerView = findViewById(R.id.image_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ImageAdapter(imageUrls));
+
     }
 }
