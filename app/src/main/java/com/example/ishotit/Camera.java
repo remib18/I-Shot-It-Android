@@ -91,6 +91,7 @@ public class Camera extends AppCompatActivity {
                 // Create intent to start Validation activity
                 Intent intent = new Intent(Camera.this, Validation.class);
                 intent.putExtra("photoFilePath", photoFile.getAbsolutePath());
+                intent.putExtra("locationName", ((TextView) findViewById(R.id.camera_location)).getText());
                 startActivity(intent);
             }
 

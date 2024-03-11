@@ -7,7 +7,9 @@ import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,9 +39,19 @@ public class Validation extends AppCompatActivity {
 
         Intent intent = getIntent();
         String photoFilePath = intent.getStringExtra("photoFilePath");
+        String locationName = intent.getStringExtra("locationName");
+
+        TextView locationNameView = findViewById(R.id.validation_location);
+        locationNameView.setText(locationName);
 
         ImageView imageView = findViewById(R.id.validation_cameraView);
         Bitmap bitmap = BitmapFactory.decodeFile(photoFilePath);
+
+        ImageButton validateButton = findViewById(R.id.validation_enterLifeBtn);
+        validateButton.setOnClickListener(v -> {
+            Intent newIntent = new Intent(this, MyPresentLife.class);
+            startActivity(newIntent);
+        });
 
         try {
             ExifInterface exif = new ExifInterface(photoFilePath);
@@ -64,7 +76,5 @@ public class Validation extends AppCompatActivity {
         }
 
         imageView.setImageBitmap(bitmap);
-
-
     }
 }

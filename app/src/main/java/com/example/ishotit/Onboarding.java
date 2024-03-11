@@ -47,6 +47,7 @@ public class Onboarding extends AppCompatActivity {
 
         if (age < 13) {
             Toast.makeText(this, "You must be at least 13 years old to use I Shot It.", Toast.LENGTH_LONG).show();
+            return;
         }
 
         SharedPreferences preferences = getSharedPreferences("ishotit", MODE_PRIVATE);

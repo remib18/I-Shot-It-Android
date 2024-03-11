@@ -48,7 +48,7 @@ public class ReverseGeocoding {
     }
 
     public static void getLocationName(Context context, Activity activity, Function<String, Void> callback) {
-        LocationManager locationManager = (LocationManager) context.getSystemService(LocationManager.class);
+        LocationManager locationManager = context.getSystemService(LocationManager.class);
         askForLocationPermission(context, activity);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
