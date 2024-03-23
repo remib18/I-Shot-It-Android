@@ -6,10 +6,6 @@ import java.util.List;
 
 public class Picture {
 
-    public static void uploadPicture(String picturePath, String userId, String locationName, String prompt) {
-
-    }
-
     public static List<PictureResponse> getAllForCurrentPrompt() {
         return new ArrayList<>();
     }

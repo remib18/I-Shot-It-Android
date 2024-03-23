@@ -12,4 +12,5 @@
     <string name="validation_enterLifeBtnDescription"><![CDATA[Enter life ->]]></string>
     <string name="validation_loadingInstructions">Loading instructions...</string>
     <string name="validation_loadingLocation">Loading location...</string>
+    <string name="my_present_life">My Present Life</string>
 </resources>
