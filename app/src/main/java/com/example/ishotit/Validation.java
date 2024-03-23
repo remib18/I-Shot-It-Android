@@ -1,6 +1,8 @@
 package com.example.ishotit;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -17,7 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.ishotit.BackendConnector.FirebaseUploader;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
+import java.util.Date;
 
 public class Validation extends AppCompatActivity {
 
@@ -49,7 +55,13 @@ public class Validation extends AppCompatActivity {
 
         ImageButton validateButton = findViewById(R.id.validation_enterLifeBtn);
         validateButton.setOnClickListener(v -> {
+
+            SharedPreferences preferences = getSharedPreferences("ishotit", Context.MODE_PRIVATE);
+            String userName = preferences.getString("username", "");
+
             Intent newIntent = new Intent(this, MyPresentLife.class);
+            FirebaseUploader uploader = new FirebaseUploader();
+            uploader.uploadPhoto(photoFilePath, userName, new Date(), locationName, "prompt");
             startActivity(newIntent);
         });
 
