@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -18,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.exifinterface.media.ExifInterface;
 
 import com.example.ishotit.BackendConnector.FirebaseUploader;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Date;
 
 public class Validation extends AppCompatActivity {
@@ -64,6 +65,13 @@ public class Validation extends AppCompatActivity {
             uploader.uploadPhoto(photoFilePath, userName, new Date(), locationName, "prompt");
             startActivity(newIntent);
         });
+
+        if (Objects.isNull(photoFilePath)) {
+            Log.e("ISHOTIT:Validation", "No photo file path provided");
+            return;
+        }
+
+        assert photoFilePath != null;
 
         try {
             ExifInterface exif = new ExifInterface(photoFilePath);

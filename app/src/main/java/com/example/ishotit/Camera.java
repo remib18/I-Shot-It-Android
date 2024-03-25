@@ -50,6 +50,8 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        findViewById(R.id.camera_captureBtn).setEnabled(false);
     }
 
     @Override
@@ -150,6 +152,8 @@ public class Camera extends AppCompatActivity {
                 // Connect the preview use case to the preview view
                 preview.setSurfaceProvider(cameraView.getSurfaceProvider());
                 Log.d("ISHOTIT:Camera", "Preview set to surface provider");
+
+                findViewById(R.id.camera_captureBtn).setEnabled(true);
 
             } catch (ExecutionException | InterruptedException e) {
                 Log.e("ISHOTIT:Camera", "Error loading camera", e);

@@ -38,6 +38,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation ("com.google.firebase:firebase-auth:22.3.1")
     implementation ("com.google.firebase:firebase-firestore:24.11.0")
+    implementation("androidx.exifinterface:exifinterface:1.3.6")
+    implementation("androidx.exifinterface:exifinterface:1.3.6")
     testImplementation("junit:junit:4.13.2")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.squareup.picasso:picasso:2.71828")
