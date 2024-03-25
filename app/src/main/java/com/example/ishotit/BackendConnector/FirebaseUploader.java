@@ -3,12 +3,6 @@ package com.example.ishotit.BackendConnector;
 import android.net.Uri;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -42,23 +36,8 @@ public class FirebaseUploader {
             photo.put("url", uri.toString());
 
             db.collection("photos").add(photo)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d("ISHOTIT:Validation", "DocumentSnapshot added with ID: " + documentReference.getId());
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("ISHOTIT:Validation", "Error adding document", e);
-                        }
-                    });
-        })).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Log.e("ISHOTIT:Validation", "Upload failed", exception);
-            }
-        });
+                    .addOnSuccessListener(documentReference -> Log.d("ISHOTIT:Validation", "DocumentSnapshot added with ID: " + documentReference.getId()))
+                    .addOnFailureListener(e -> Log.w("ISHOTIT:Validation", "Error adding document", e));
+        })).addOnFailureListener(exception -> Log.e("ISHOTIT:Validation", "Upload failed", exception));
     }
 }

@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ishotit.BackendConnector.Picture;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,26 +36,7 @@ public class MyPresentLife extends AppCompatActivity {
         loadAllImages();
     }
 
-    /*@SuppressLint("NotifyDataSetChanged")
-    private void loadImages() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("photos")
-                .orderBy("date", Query.Direction.DESCENDING)
-                .limit(5)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String url = document.getString("url");
-                            imageUrls.add(url);
-                        }
-                        imageAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.d("MyPresentLife", "Error getting documents: ", task.getException());
-                    }
-                });
-    }*/
-
+    @SuppressLint("NotifyDataSetChanged")
     private void loadAllImages() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("photos")

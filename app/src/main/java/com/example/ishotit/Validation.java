@@ -20,11 +20,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.exifinterface.media.ExifInterface;
 
 import com.example.ishotit.BackendConnector.FirebaseUploader;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Date;
+import java.util.Objects;
 
 public class Validation extends AppCompatActivity {
 
