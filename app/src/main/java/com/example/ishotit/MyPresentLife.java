@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MyPresentLife extends AppCompatActivity {
 
-    private List<Picture.PictureResponse> imageUrls = new ArrayList<>();
+    private final List<Picture.PictureResponse> imageUrls = new ArrayList<>();
     private ImageAdapter imageAdapter;
 
     @Override
@@ -56,7 +56,6 @@ public class MyPresentLife extends AppCompatActivity {
                 });
     }*/
 
-    @SuppressLint("NotifyDataSetChanged")
     private void loadAllImages() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("photos")
