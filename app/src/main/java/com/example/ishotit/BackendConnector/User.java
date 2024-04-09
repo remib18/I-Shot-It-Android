@@ -3,6 +3,7 @@ package com.example.ishotit.BackendConnector;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,12 +42,6 @@ public class User {
     public static boolean hasAlreadyPostedToday(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Photo collection structure
-        // {
-        //     userId: "user1",
-        //     date: "2021-09-01"
-        // }
-
         Date past24Hours = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 
         AtomicBoolean hasPostedToday = new AtomicBoolean(false);
@@ -62,6 +57,8 @@ public class User {
                         }
                     }
                 });
+
+        Log.d("ISHOTIT:User", "User has posted today: " + hasPostedToday.get());
 
         return hasPostedToday.get();
     }

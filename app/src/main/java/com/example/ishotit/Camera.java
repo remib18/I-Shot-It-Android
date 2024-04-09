@@ -27,6 +27,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ishotit.BackendConnector.ReverseGeocoding;
+import com.example.ishotit.BackendConnector.User;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
@@ -59,6 +60,12 @@ public class Camera extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ReverseGeocoding.getLocationName(this, this, this::handleGeocodingResult);
+
+        if (User.hasAlreadyPostedToday(User.getId(this))) {
+            Intent intent = new Intent(this, MyPresentLife.class);
+            startActivity(intent);
+            finish();
+        }
 
         findViewById(R.id.camera_captureBtn).setOnClickListener(this::handlePhotoCapture);
 
