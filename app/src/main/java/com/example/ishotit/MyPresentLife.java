@@ -44,13 +44,11 @@ public class MyPresentLife extends AppCompatActivity {
         findViewById(R.id.profile_image_left).setOnClickListener(v -> {
             Intent intent = new Intent(this, Friends.class);
             startActivity(intent);
-            finish();
         });
 
         findViewById(R.id.profile_image_right).setOnClickListener(v -> {
             Intent intent = new Intent(this, History.class);
             startActivity(intent);
-            finish();
         });
     }
 
