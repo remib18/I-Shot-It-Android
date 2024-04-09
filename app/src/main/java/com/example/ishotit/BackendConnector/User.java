@@ -72,9 +72,15 @@ public class User {
     public static String getId(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String userId = prefs.getString("userId", "");
+
         if (userId.isEmpty()) {
             return null;
         }
+
+        if (userId.equals("TODO")) {  // TODO: Remove this line: dev fix
+            return null;
+        }
+
         return userId;
     }
 
