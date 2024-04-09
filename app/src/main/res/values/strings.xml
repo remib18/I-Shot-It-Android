@@ -19,4 +19,6 @@
     <string name="my_true_history">My True Past</string>
     <string name="go_to_my_present_life">go_to_my_present_life</string>
     <string name="non_visible" />
+    <string name="view_image_item">view_image_item</string>
+    <string name="point_liste">•</string>
 </resources>
