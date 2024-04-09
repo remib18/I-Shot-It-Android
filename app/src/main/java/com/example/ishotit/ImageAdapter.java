@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ishotit.BackendConnector.Picture;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
@@ -35,7 +37,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Picasso.get().load(picture.picturePath).into(holder.imageView);
         holder.usernameTextView.setText(picture.userId);
         holder.locationTextView.setText(picture.locationName);
-        holder.dateTextView.setText(picture.date.toString());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String formattedDate = sdf.format(picture.date);
+        String datePoint = formattedDate + " •";
+        holder.dateTextView.setText(datePoint);
     }
 
     @Override
