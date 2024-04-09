@@ -61,11 +61,13 @@ public class Camera extends AppCompatActivity {
         super.onResume();
         ReverseGeocoding.getLocationName(this, this, this::handleGeocodingResult);
 
-        if (User.hasAlreadyPostedToday(User.getId(this))) {
-            Intent intent = new Intent(this, MyPresentLife.class);
-            startActivity(intent);
-            finish();
-        }
+        User.hasAlreadyPostedToday(User.getId(this), (hasPosted) -> {
+            if (hasPosted) {
+                Intent intent = new Intent(this, MyPresentLife.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         findViewById(R.id.camera_captureBtn).setOnClickListener(this::handlePhotoCapture);
 

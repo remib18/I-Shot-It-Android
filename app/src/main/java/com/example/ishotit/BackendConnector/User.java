@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class User {
 
@@ -39,12 +38,10 @@ public class User {
         return userId;
     }
 
-    public static boolean hasAlreadyPostedToday(String userId) {
+    public static void hasAlreadyPostedToday(String userId, ResponseCallback<Boolean> callback) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Date past24Hours = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
-
-        AtomicBoolean hasPostedToday = new AtomicBoolean(false);
 
         db.collection("photos")
                 .whereEqualTo("userId", userId)
@@ -52,15 +49,12 @@ public class User {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        if (!task.getResult().isEmpty()) {
-                            hasPostedToday.set(true);
-                        }
+                        Log.d("ISHOTIT:User", "Checking if user has already posted today: " + !task.getResult().isEmpty());
+                        callback.onResult(!task.getResult().isEmpty());
+                    } else {
+                        Log.e("ISHOTIT:User", "Error getting documents: ", task.getException());
                     }
                 });
-
-        Log.d("ISHOTIT:User", "User has posted today: " + hasPostedToday.get());
-
-        return hasPostedToday.get();
     }
 
     public static String getId(Context context) {
@@ -76,6 +70,10 @@ public class User {
         }
 
         return userId;
+    }
+
+    public interface ResponseCallback<T> {
+        void onResult(T value);
     }
 
 }

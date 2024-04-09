@@ -17,15 +17,16 @@ public class MainActivity extends AppCompatActivity {
 
         String userId = User.getId(this);
 
-        Class<?> activity;
         if (Objects.isNull(userId)) {
-            activity = Onboarding.class;
+            Intent intent = new Intent(this, Onboarding.class);
+            startActivity(intent);
+            finish();
         } else {
-            activity = User.hasAlreadyPostedToday(userId) ? MyPresentLife.class : Camera.class;
+            User.hasAlreadyPostedToday(userId, hasPosted -> {
+                Intent intent = new Intent(this, hasPosted ? MyPresentLife.class : Camera.class);
+                startActivity(intent);
+                finish();
+            });
         }
-        Intent intent = new Intent(this, activity);
-        startActivity(intent);
-
-        finish();
     }
 }
