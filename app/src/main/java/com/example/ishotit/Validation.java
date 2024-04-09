@@ -27,6 +27,9 @@ import java.util.Objects;
 
 public class Validation extends AppCompatActivity {
 
+    private String location = null;
+    private String prompt = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +48,14 @@ public class Validation extends AppCompatActivity {
 
         Intent intent = getIntent();
         String photoFilePath = intent.getStringExtra("photoFilePath");
-        String locationName = intent.getStringExtra("locationName");
+        location = intent.getStringExtra("location");
+        prompt = intent.getStringExtra("prompt");
 
         TextView locationNameView = findViewById(R.id.validation_location);
-        locationNameView.setText(locationName);
+        locationNameView.setText(location);
+
+        TextView promptView = findViewById(R.id.validation_instruction);
+        promptView.setText(prompt);
 
         ImageView imageView = findViewById(R.id.validation_cameraView);
         Bitmap bitmap = BitmapFactory.decodeFile(photoFilePath);
@@ -60,7 +67,9 @@ public class Validation extends AppCompatActivity {
             String userName = preferences.getString("username", "");
 
             Intent newIntent = new Intent(this, MyPresentLife.class);
-            Picture.upload(photoFilePath, userName, new Date(), locationName, "prompt", this);
+            newIntent.putExtra("location", location);
+            newIntent.putExtra("prompt", prompt);
+            Picture.upload(photoFilePath, userName, new Date(), location, prompt, this);
             startActivity(newIntent);
             finish();
         });

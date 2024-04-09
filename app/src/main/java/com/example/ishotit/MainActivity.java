@@ -2,31 +2,71 @@ package com.example.ishotit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ishotit.BackendConnector.Instruction;
+import com.example.ishotit.BackendConnector.ReverseGeocoding;
 import com.example.ishotit.BackendConnector.User;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private String userId = null;
+    private String location = null;
+    private String prompt = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        String userId = User.getId(this);
+        // Loading userId
+        userId = User.getId(this);
 
-        if (Objects.isNull(userId)) {
-            Intent intent = new Intent(this, Onboarding.class);
-            startActivity(intent);
-            finish();
-        } else {
-            User.hasAlreadyPostedToday(userId, hasPosted -> {
-                Intent intent = new Intent(this, hasPosted ? MyPresentLife.class : Camera.class);
-                startActivity(intent);
-                finish();
-            });
+        // Loading location
+        ReverseGeocoding.getLocationName(this, this, locationName -> {
+            location = locationName;
+            onUpdate();
+            return null;
+        });
+
+        // Loading prompt
+        Instruction.loadCurrentInstruction(instruction -> {
+            prompt = instruction;
+            onUpdate();
+        });
+    }
+
+    private void onUpdate() {
+        if (Objects.nonNull(location) && Objects.nonNull(prompt)) {
+            Log.d("ISHOTIT:MainActivity", "Ready to redirect");
+            Log.d("ISHOTIT:MainActivity", "Location: " + location);
+            Log.d("ISHOTIT:MainActivity", "Prompt: " + prompt);
+            onReady();
         }
+    }
+
+    private void onReady() {
+        // Redirecting to the appropriate activity with the location and prompt
+        if (Objects.isNull(userId)) {
+            redirect(Onboarding.class);
+            return;
+        }
+        User.hasAlreadyPostedToday(userId, hasPosted -> {
+            Class<?> activity = hasPosted ? MyPresentLife.class : Camera.class;
+            redirect(activity);
+        });
+    }
+
+    private void redirect(Class<?> activity) {
+        Intent intent = new Intent(this, activity);
+        intent.putExtra("location", location);
+        intent.putExtra("prompt", prompt);
+        startActivity(intent);
+        finish();
     }
 }

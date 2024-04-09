@@ -26,7 +26,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.ishotit.BackendConnector.ReverseGeocoding;
 import com.example.ishotit.BackendConnector.User;
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -39,10 +38,12 @@ import java.util.concurrent.ExecutionException;
 public class Camera extends AppCompatActivity {
 
     private boolean isCameraLoaded = false;
-    private boolean isLocationObtained = false;
     private ImageCapture imageCapture = null;
     private boolean isCaptureAllowed = false;
     private boolean isCapturingPhoto = false;
+
+    private String location = null;
+    private String prompt = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +55,21 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Intent intent = getIntent();
+        location = intent.getStringExtra("location");
+        prompt = intent.getStringExtra("prompt");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ReverseGeocoding.getLocationName(this, this, this::handleGeocodingResult);
 
         User.hasAlreadyPostedToday(User.getId(this), (hasPosted) -> {
             if (hasPosted) {
                 Intent intent = new Intent(this, MyPresentLife.class);
+                intent.putExtra("prompt", prompt);
+                intent.putExtra("location", location);
                 startActivity(intent);
                 finish();
             }
@@ -79,13 +85,12 @@ public class Camera extends AppCompatActivity {
                 loadCamera();
             }
         });
-    }
 
-    private Void handleGeocodingResult(String locationName) {
-        TextView location = findViewById(R.id.camera_location);
-        location.setText(locationName);
-        isLocationObtained = true;
-        return null;
+        // Set the prompt and location
+        TextView promptView = findViewById(R.id.camera_instruction);
+        promptView.setText(prompt);
+        TextView locationView = findViewById(R.id.camera_location);
+        locationView.setText(location);
     }
 
     private void handlePhotoCapture(View v) {
@@ -99,8 +104,8 @@ public class Camera extends AppCompatActivity {
             Toast.makeText(this, "Cannot capture photo, try again in a few seconds...", Toast.LENGTH_LONG).show();
             return;
         }
-        if (!isLocationObtained || !isCameraLoaded) {
-            Log.d("ISHOTIT:Camera", "Location not obtained or camera not loaded, ignoring click");
+        if (!isCameraLoaded) {
+            Log.d("ISHOTIT:Camera", "Camera not loaded, ignoring click");
             Toast.makeText(this, "Cannot capture photo, try again in a few seconds...", Toast.LENGTH_LONG).show();
             return;
         }
@@ -120,7 +125,8 @@ public class Camera extends AppCompatActivity {
                 // Create intent to start Validation activity
                 Intent intent = new Intent(Camera.this, Validation.class);
                 intent.putExtra("photoFilePath", photoFile.getAbsolutePath());
-                intent.putExtra("locationName", ((TextView) findViewById(R.id.camera_location)).getText());
+                intent.putExtra("prompt", prompt);
+                intent.putExtra("location", location);
                 startActivity(intent);
             }
 
