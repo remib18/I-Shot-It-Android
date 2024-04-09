@@ -19,7 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.exifinterface.media.ExifInterface;
 
-import com.example.ishotit.BackendConnector.FirebaseUploader;
+import com.example.ishotit.BackendConnector.Picture;
 
 import java.io.IOException;
 import java.util.Date;
@@ -60,9 +60,9 @@ public class Validation extends AppCompatActivity {
             String userName = preferences.getString("username", "");
 
             Intent newIntent = new Intent(this, MyPresentLife.class);
-            FirebaseUploader uploader = new FirebaseUploader();
-            uploader.uploadPhoto(photoFilePath, userName, new Date(), locationName, "prompt");
+            Picture.upload(photoFilePath, userName, new Date(), locationName, "prompt");
             startActivity(newIntent);
+            finish();
         });
 
         if (Objects.isNull(photoFilePath)) {

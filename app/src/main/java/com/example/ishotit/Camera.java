@@ -40,6 +40,8 @@ public class Camera extends AppCompatActivity {
     private boolean isCameraLoaded = false;
     private boolean isLocationObtained = false;
     private ImageCapture imageCapture = null;
+    private boolean isCaptureAllowed = false;
+    private boolean isCapturingPhoto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,6 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        findViewById(R.id.camera_captureBtn).setEnabled(false);
     }
 
     @Override
@@ -80,10 +80,22 @@ public class Camera extends AppCompatActivity {
     }
 
     private void handlePhotoCapture(View v) {
-        if (!isLocationObtained || !isCameraLoaded) {
+        Log.d("ISHOTIT:Camera", "Capture button clicked");
+        if (isCapturingPhoto) {
+            Log.d("ISHOTIT:Camera", "Already capturing photo, ignoring click");
+            return;
+        }
+        if (!isCaptureAllowed) {
+            Log.d("ISHOTIT:Camera", "Capture not allowed, ignoring click");
             Toast.makeText(this, "Cannot capture photo, try again in a few seconds...", Toast.LENGTH_LONG).show();
             return;
         }
+        if (!isLocationObtained || !isCameraLoaded) {
+            Log.d("ISHOTIT:Camera", "Location not obtained or camera not loaded, ignoring click");
+            Toast.makeText(this, "Cannot capture photo, try again in a few seconds...", Toast.LENGTH_LONG).show();
+            return;
+        }
+        isCapturingPhoto = true;
         Log.d("ISHOTIT:Camera", "Capturing photo...");
         // Create timestamped output file to hold the image
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
@@ -101,7 +113,6 @@ public class Camera extends AppCompatActivity {
                 intent.putExtra("photoFilePath", photoFile.getAbsolutePath());
                 intent.putExtra("locationName", ((TextView) findViewById(R.id.camera_location)).getText());
                 startActivity(intent);
-                finish();
             }
 
             @Override
@@ -160,7 +171,7 @@ public class Camera extends AppCompatActivity {
                 preview.setSurfaceProvider(cameraView.getSurfaceProvider());
                 Log.d("ISHOTIT:Camera", "Preview set to surface provider");
 
-                findViewById(R.id.camera_captureBtn).setEnabled(true);
+                isCaptureAllowed = true;
                 Log.d("ISHOTIT:Camera", "Camera loaded, capture button enabled");
 
             } catch (ExecutionException | InterruptedException e) {
