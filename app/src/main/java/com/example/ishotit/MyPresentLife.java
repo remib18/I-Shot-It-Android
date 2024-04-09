@@ -1,6 +1,7 @@
 package com.example.ishotit;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -34,6 +35,23 @@ public class MyPresentLife extends AppCompatActivity {
         recyclerView.setAdapter(imageAdapter);
 
         loadAllImages();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        findViewById(R.id.profile_image_left).setOnClickListener(v -> {
+            Intent intent = new Intent(this, Friends.class);
+            startActivity(intent);
+            finish();
+        });
+
+        findViewById(R.id.profile_image_right).setOnClickListener(v -> {
+            Intent intent = new Intent(this, History.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @SuppressLint("NotifyDataSetChanged")

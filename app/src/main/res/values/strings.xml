@@ -13,4 +13,7 @@
     <string name="validation_loadingInstructions">Loading instructions…</string>
     <string name="validation_loadingLocation">Loading location…</string>
     <string name="my_present_life">My Present Life</string>
+    <string name="present_life_go_to_profil">Go to profil</string>
+    <string name="logo">Logo</string>
+    <string name="history">History</string>
 </resources>
