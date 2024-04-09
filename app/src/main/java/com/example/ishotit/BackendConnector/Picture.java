@@ -1,5 +1,6 @@
 package com.example.ishotit.BackendConnector;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -25,7 +26,10 @@ public class Picture {
         return new ArrayList<>();
     }
 
-    public static void upload(String photoFilePath, String username, Date date, String locationName, String prompt) {
+    public static void upload(String photoFilePath, String username, Date date, String locationName, String prompt, Context context) {
+
+        String userId = User.getId(context);
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
@@ -44,6 +48,7 @@ public class Picture {
             photo.put("locationName", locationName);
             photo.put("prompt", prompt);
             photo.put("url", uri.toString());
+            photo.put("userId", userId);
 
             db.collection("photos").add(photo)
                     .addOnSuccessListener(documentReference -> Log.d("ISHOTIT:Validation", "DocumentSnapshot added with ID: " + documentReference.getId()))

@@ -16,4 +16,6 @@
     <string name="present_life_go_to_profil">Go to profil</string>
     <string name="logo">Logo</string>
     <string name="history">History</string>
+    <string name="my_true_history">My True Past</string>
+    <string name="go_to_my_present_life">go_to_my_present_life</string>
 </resources>

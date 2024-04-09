@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ishotit.BackendConnector.Picture;
+import com.example.ishotit.BackendConnector.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -48,6 +49,7 @@ public class MyPresentLife extends AppCompatActivity {
 
         findViewById(R.id.profile_image_right).setOnClickListener(v -> {
             Intent intent = new Intent(this, History.class);
+            intent.putExtra("userId", User.getId(this));
             startActivity(intent);
         });
     }
@@ -58,34 +60,6 @@ public class MyPresentLife extends AppCompatActivity {
         db.collection("photos")
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(5)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String url = document.getString("url");
-                            String username = document.getString("username");
-                            String locationName = document.getString("locationName");
-                            Date date = document.getDate("date");
-                            Picture.PictureResponse picture = new Picture.PictureResponse();
-                            picture.picturePath = url;
-                            picture.userId = username;
-                            picture.locationName = locationName;
-                            picture.date = date;
-                            imageUrls.add(picture);
-                        }
-                        imageAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.d("MyPresentLife", "Error getting documents: ", task.getException());
-                    }
-                });
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private void loadUserImages(String userId) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("photos")
-                .whereEqualTo("userId", userId)
-                .orderBy("date", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

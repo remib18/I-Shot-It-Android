@@ -60,7 +60,7 @@ public class Validation extends AppCompatActivity {
             String userName = preferences.getString("username", "");
 
             Intent newIntent = new Intent(this, MyPresentLife.class);
-            Picture.upload(photoFilePath, userName, new Date(), locationName, "prompt");
+            Picture.upload(photoFilePath, userName, new Date(), locationName, "prompt", this);
             startActivity(newIntent);
             finish();
         });
