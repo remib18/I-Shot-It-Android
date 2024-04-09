@@ -1,13 +1,13 @@
 package com.example.ishotit;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Date;
+import com.example.ishotit.BackendConnector.User;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,20 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String userId = prefs.getString("userId", "");
-        String lastPosted = prefs.getString("lastPosted", "");
+        String userId = User.getId(this);
 
         Class<?> activity;
-        if (userId.isEmpty()) {
+        if (Objects.isNull(userId)) {
             activity = Onboarding.class;
-        } else if (!lastPosted.isEmpty()) {
-            Date lastPostedAt = new Date(Long.parseLong(lastPosted));
-            Date now = new Date();
-            boolean havePostedInTheLast24h = now.getTime() - lastPostedAt.getTime() < 24 * 60 * 60 * 1000;
-            activity = havePostedInTheLast24h ? MyPresentLife.class : Camera.class;
         } else {
-            activity = Camera.class;
+            activity = User.hasAlreadyPostedToday(userId) ? MyPresentLife.class : Camera.class;
         }
         Intent intent = new Intent(this, activity);
         startActivity(intent);
