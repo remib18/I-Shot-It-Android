@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "386733389299",
+    "project_id": "i-shot-it-ea6fe",
+    "storage_bucket": "i-shot-it-ea6fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386733389299:android:6f7ebb0a531b95bf078e86",
+        "android_client_info": {
+          "package_name": "com.example.ishotit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhH-8SdVkqjZoad-JZTL1KuYK5Hma45yA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
