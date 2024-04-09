@@ -54,7 +54,6 @@ public class MyPresentLife extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private void loadAllImages() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("photos")

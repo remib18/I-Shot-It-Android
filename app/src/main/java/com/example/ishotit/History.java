@@ -52,7 +52,6 @@ public class History extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private void loadUserImages(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("photos")
@@ -75,7 +74,7 @@ public class History extends AppCompatActivity {
                         }
                         imageAdapter.notifyDataSetChanged();
                     } else {
-                        Log.d("MyPresentLife", "Error getting documents: ", task.getException());
+                        Log.d("MyHistory", "Error getting documents: ", task.getException());
                     }
                 });
     }
