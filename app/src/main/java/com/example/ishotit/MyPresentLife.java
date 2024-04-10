@@ -57,7 +57,7 @@ public class MyPresentLife extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("photos")
                 .orderBy("date", Query.Direction.DESCENDING)
-                .limit(5)
+                .limit(5) // J'ai mis 5 pour l'instant pour éviter trop de requètes
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

@@ -1,5 +1,6 @@
 package com.example.ishotit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +20,16 @@ public class Friends extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        findViewById(R.id.donate_now).setOnClickListener(v -> {
+            Intent intent = new Intent(this, PaypalWebView.class);
+            startActivity(intent);
         });
     }
 }

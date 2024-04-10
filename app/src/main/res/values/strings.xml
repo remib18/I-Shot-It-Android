@@ -22,4 +22,9 @@
     <string name="loading">Loading...</string>
     <string name="view_image_item">view_image_item</string>
     <string name="point_liste">•</string>
+    <string name="back">Back</string>
+    <string name="my_fake_friends">My fake friends</string>
+    <string name="work_in_progress_illustration">Work in progress illustration</string>
+    <string name="we_believe_at">We believe, at I Shot It Inc., that a social media truely is one when there is friends to follow. But we do not have the budget to make that happen.</string>
+    <string name="work_in_progress">Work in progress...</string>
 </resources>

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (isAirplaneModeOn) {
             Log.d("ISHOTIT:MainActivity", "Airplane mode is on");
-            Toast.makeText(this, "Please turn off airplane mode to use our app.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please turn off airplane mode to use our app and restart.", Toast.LENGTH_LONG).show();
             return;
         }
 
